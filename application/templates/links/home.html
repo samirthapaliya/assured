@@ -1,0 +1,229 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+<title>Assured Travel & Tours</title>
+
+{% endblock %}
+
+
+{% block main_content %}
+    {% include 'carousel.html' %}
+     <div class="container-fluid header causerol" id="header">
+          <div class="row height-max align-items-center text-left">
+              <div class="col col-md-9  ml-auto pr-5">
+                  <h5 class="title-heading d-inline-block p-2 text-uppercase">GET YOUR BEST DEAL NOW</h5>
+                  <h2 class="text-uppercase my-2 title">Explore the world </h2>
+                  <h3 class="text-uppercase">At single place</h3>
+                  <button class="btn"><a href="#popular-destination" class="boxed-btn4">Explore Now</a> </button>
+            </div>
+          </div>
+      </div>
+
+    <!-- where_togo_area_start  -->
+    <div class="where_togo_area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="form_area text-center">
+                        <p class="text-white" style="font-size: large">Search your dream location now</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="search_wrap text-center">
+                        <form class="search_form"  action="{% url 'search' %}" method="GET">
+                            <div class="input_field" >
+                                <label>
+                                    <input type="text" placeholder="Where to go?" name="location">
+                                </label>
+                            </div>
+                            <div class="search_btn">
+                                <input class="boxed-btn4 " type="submit" value="Search">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- where_togo_area_end  -->
+
+    <!-- popular_destination_area_start  -->
+    <div class="popular_destination_area" id="popular-destination">
+        <div class="container">
+           <div class="d-flex">
+
+                <div class="col-lg-10">
+                    <div class="section_title text-center mb_70">
+                        <h3>Popular Destination</h3>
+                        <p>Our top destinations. See them by countries.</p>
+                    </div>
+                </div>
+               <div class="col-lg-3 ">
+                       <button class="btn"><a href="{% url 'destinationAP' %}" class="boxed-btn4">View All</a> </button>
+                </div>
+
+            </div>
+                <div class="row">
+                {% for dest in destinations %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_destination">
+
+                        <div class="thumb">
+                            <img src="{{ dest.picture.url }}" alt="">
+                        </div>
+
+                        <div class="content">
+                            <p class="d-flex align-items-center">{{ dest.name }}
+                                <a href="{% url 'travelDestination' dest.id %}">
+                                    {{ dest.tour_set.all.count }} Places
+                                </a>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- popular_destination_area_end  -->
+
+    <!-- newsletter_area_start  -->
+    <div class="newsletter_area overlay">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-10">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5">
+                            <div class="newsletter_text">
+                                <h4>Subscribe Our Newsletter</h4>
+                                <p>Subscribe newsletter to get offers and about
+                                    new places to discover.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                                <form class="mail_form" action="{% url 'newsletter' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="row no-gutters">
+                                    <div class="col-lg-9 col-md-8">
+
+                                        <div class="newsletter_field">
+                                            <input type="email" name="email" placeholder="Your mail" >
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="newsletter_btn">
+                                            <button class="boxed-btn4 " type="submit" >Subscribe</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- newsletter_area_end  -->
+
+    <!-- popular place start  -->
+    <div class="popular_places_area">
+        <div class="container">
+            <div class="d-flex ">
+                <div class="col-lg-6">
+                    <div class="section_title text-center mb_70">
+                        <h3>Popular Places</h3>
+                        <p>Suffered alteration in some form, by injected humour or good day randomised booth anim 8-bit hella wolf moon beard words.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-right">
+                       <button class="btn"><a href="{% url 'tourAP' %}" class="boxed-btn4">View All</a> </button>
+                </div>
+            </div>
+            <div class="row">
+                {% for tour in tours %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_place">
+                        <div class="thumb">
+                            <img src="{{ tour.picture.url }}" alt="">
+                            <a href="#" class="prise">Rs.{{ tour.price }}</a>
+                        </div>
+                        <div class="place_info">
+                            <a href="{% url 'tour-detail' tour.id %}"><h3>{{ tour.location }}</h3></a>
+                            <p>{{ tour.country_Name }}</p>
+                            <div class="rating_days d-flex justify-content-between">
+                                <span id="review-star" class="d-flex justify-content-center align-items-center">
+                                     <a href="#"> <span id="review-count">{{ tour.reviews.count }}</span> Review</a>
+                                </span>
+                                <div class="days">
+                                    <i class="fa fa-clock-o"></i>
+                                    <a href="#">{{ tour.itinerary_set.all.count }} Days</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!--travel variation area-->
+    <div class="travel_variation_area">
+        <div class="container">
+            <div class="row">
+                 <div class="col-lg-12">
+                    <div class="section_title text-center mb_70">
+                        <h3>Main Attraction</h3>
+                              </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_travel text-center">
+                        <div class="icon">
+                            <img src="../../static/images/svg_icon/1.svg" alt="">
+                        </div>
+                        <h3>Comfortable Journey</h3>
+                        <p>A wonderful serenity has taken to the possession of my entire soul.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_travel text-center">
+                        <div class="icon">
+                            <img src="../../static/images/svg_icon/2.svg" alt="">
+                        </div>
+                        <h3>Luxuries Hotel</h3>
+                        <p>A wonderful serenity has taken to the possession of my entire soul.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_travel text-center">
+                        <div class="icon">
+                            <img src="../../static/images/svg_icon/3.svg" alt="">
+                        </div>
+                        <h3>Travel Guide</h3>
+                        <p>A wonderful serenity has taken to the possession of my entire soul.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--travel variation area end-->
+
+    <script>
+        var reviews_count = document.getElementById('review-count').innerHTML;
+        var review_star = document.getElementById('review-star');
+
+        for (var i=1; i<=reviews_count; i++){
+            var star = document.createElement("i");
+            star.className = "fa fa-star";
+            review_star.append(star);
+            if ( i == 5){
+                break;
+            }
+        }
+        console.log({{ tour.reviews.rating }});
+
+    </script>
+
+
+{% endblock %}

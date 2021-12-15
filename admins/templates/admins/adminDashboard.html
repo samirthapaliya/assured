@@ -1,0 +1,134 @@
+{% extends 'layout-admin.html' %}
+{% load static %}
+{% block title %}
+<title>Admin-Dashboard</title>
+{% endblock %}
+{% block content %}
+<style>
+    .card-body a{
+    text-decoration:none;
+    color:#fff;
+    }
+
+    .card-body a:hover{
+    color:orange;
+    }
+</style>
+<section style="background: darkolivegreen">
+<div class="container">
+    <br><br>
+    {% for message in messages %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+    <h6 class="success_message py-3 px-1 my-2 text-center">{{message}}</h6>
+    {% endif %}
+
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR%}
+    <h6 class="error_message py-3 px-1 my-2 text-center">{{message}}</h6>
+    {% endif %}
+    {% endfor %}
+    <div class="row">
+        <div class="col">
+            <div class="card text-white mb-3" style="max-width:35rem; background-color: #2a2a2a">
+                <div class="card-header text-center">Add Tour</div>
+                <div class="card-body">
+                    <div class="img-thumb">
+
+                    </div>
+
+                    <h1 class="card-title text-center"><a href="{% url 'getTourAd' %}">{{tour}}</a> </h1>
+
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-white mb-3" style="max-width:35rem; background-color: #2a2a2a">
+                <div class="card-header text-center">Add Itinerary</div>
+                <div class="card-body">
+                    <h1 class="card-title text-center"></h1>
+                    <h1 class="card-title text-center"><a href="{% url 'getIteneraryAd' %}">{{itinerary}}</a> </h1>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+                    <div class="card text-white mb-3" style="max-width:35rem; background-color: #2a2a2a">
+                        <div class="card-header text-center">Add Destination</div>
+                        <div class="card-body">
+                            <h1 class="card-title text-center"></h1>
+                            <h1 class="card-title text-center"><a href="{% url 'getDestinationAd' %}">{{destination}}</a> </h1>
+
+                        </div>
+                    </div>
+                </div>
+
+        <div class="col">
+            <div class="card text-white mb-3" style="max-width:35rem; background-color: #2a2a2a">
+                <div class="card-header text-center">Add Reviews</div>
+                <div class="card-body">
+                    <h1 class="card-title text-center"></h1>
+                    <h1 class="card-title text-center"><a href="{% url 'getReviewsAd' %}">{{reviews}}</a> </h1>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card text-white mb-3" style="max-width:35rem; background-color: #2a2a2a">
+                <div class="card-header text-center">Bookings</div>
+                <div class="card-body">
+
+                    <a href="{% url 'getBookingAd'%}"><h1 class="card-title text-center">{{booking}}</h1></a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-white mb-3" style="max-width:35rem; background-color: #2a2a2a">
+                <div class="card-header text-center">Subscription</div>
+                <div class="card-body">
+                    <a href="{% url 'getSubscription'%}"><h1 class="card-title text-center">{{subscribe}}</h1></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card text-white mb-3" style="max-width:35rem; background-color: #2a2a2a">
+                <div class="card-header text-center">Total Users</div>
+                <div class="card-body">
+                    <a href="{% url 'showUser'%}"><h1 class="card-title text-center">{{user}}</h1></a>
+
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card text-white mb-3" style="max-width:35rem; background-color: #2a2a2a">
+                <div class="card-header text-center">Total Admins</div>
+                <div class="card-body">
+                    <a href="{% url 'showAdmin'%}"><h1 class="card-title text-center">{{admin}}</h1></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card text-white mb-3" style="max-width:35rem; background-color: #2a2a2a">
+                <div class="card-header text-center">Total Newsletter Email</div>
+                <div class="card-body">
+                    <a href="{% url 'getNewsletter'%}"><h1 class="card-title text-center">{{newsletter}}</h1></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+{% endblock %}

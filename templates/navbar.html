@@ -1,0 +1,69 @@
+{% load static %}
+{% load bootstrap %}
+
+<link href="{% static 'css/navbar.css' %}" type="text/css", rel="stylesheet">
+
+
+<nav class="navbar navbar-expand-lg navbar-dark ">
+  <a class="navbar-brand"><img src="../static/images/logo.png" alt="logo"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item">
+          <a class="{{ active_home }}" href="{% url 'homeAP' %}">Home <span class="sr-only"></span></a>
+      </li>
+
+      <li class="nav-item">
+          <a class="{{ active_tours}}" href="{% url 'tourAP' %}">Tour<span class="sr-only"></span></a>
+      </li>
+
+      <li class="nav-item">
+          <a class="{{ active_destination }}" href="{% url 'destinationAP' %}">Destination<span class="sr-only"></span></a>
+      </li>
+
+      <li class="nav-item">
+          <a class="{{ active_about }}" href="{% url 'aboutAP' %}">About Us<span class="sr-only"></span></a>
+      </li>
+
+      <li class="nav-item">
+          <a class="{{ active_contact }}" href="{% url 'contactAP' %}">Contact Us <span class="sr-only"></span></a>
+      </li>
+    </ul>
+
+    <form class="form-inline my-2 my-lg-0">
+        <ul class="navbar-nav mr-auto">
+          {% if request.user.is_authenticated %}
+              <div class="dropdown navbar-btn2">
+                <button class="btn boxed-btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Welcome {{ user }}
+                </button>
+                  <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                    {% if request.user.is_staff %}
+                      <a class="dropdown-item {{ active_dashboard }}" href="{% url 'adminDashboardAd' %}">Admin Dashboard</a>
+                    {% endif %}
+                      <a class="dropdown-item {{ active_profile }}" href="{% url 'profileAc' %}">Profile</a>
+                      <a class="dropdown-item {{ active_order }}" href="{% url 'orderD' %}">Orders</a>
+                      <a class="dropdown-item {{ active_chapas }}" href="{% url 'change_password' %}">Change Password</a>
+                  </div>
+              </div>
+
+              <li class="navbar-btn2 ">
+                <a class="btn boxed-btn my-2 my-sm-0" href="{% url 'logoutAc' %}">
+                    Logout</a>
+              </li>
+          {% else %}
+              <li class="navbar-btn1">
+                <a class="btn boxed-btn my-2 my-sm-0" href="{% url 'login' %}">Login</a>
+              </li>
+              <li class="navbar-btn2">
+                <a class="btn boxed-btn4" href="{% url 'registerAc' %}">Register</a>
+              </li>
+          {% endif %}
+        </ul>
+    </form>
+  </div>
+</nav>

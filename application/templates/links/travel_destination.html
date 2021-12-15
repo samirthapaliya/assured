@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+<!--title-->
+{% block title %}
+<title>Tours</title>
+{% endblock %}
+
+{% block main_content %}
+    <!-- bradcam_area  -->
+    <div class="bradcam_area " id="bg-tour" >
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text text-center">
+                        <h3>{{ destination.name }}</h3>
+                        <p>{{ destination.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ bradcam_area  -->
+
+    <!-- popular place start  -->
+    <div class="popular_places_area">
+        <div class="container">
+            <div class="row justify-content-center">
+
+            </div>
+            <div class="row">
+                {% for i in tour %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_place">
+                        <div class="thumb">
+                            <img src="{{ i.picture.url }}" alt="">
+                            <a href="#" class="prise">Rs.{{ i.price }}</a>
+                        </div>
+                        <div class="place_info">
+                            <a href="{% url 'tour-detail' i.id %}"><h3>{{ i.location }}</h3></a>
+                            <p>{{ i.country_Name }}</p>
+                            <div class="rating_days d-flex justify-content-between">
+                                <span id="review-star" class="d-flex justify-content-center align-items-center">
+                                     <a href="#"> <span id="review-count">{{ i.reviews.count }}</span> Review</a>
+                                </span>
+                                <div class="days">
+                                    <i class="fa fa-clock-o"></i>
+                                    <a href="#">{{ i.itinerary_set.all.count }} Days</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('bg-tour').style.background =" url('{{ destination.picture.url }}')";
+    </script>
+
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'layout-admin.html' %}
+{% block title %}
+<title>All Users</title>
+{% endblock%}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12 offset">
+            <h1 class="text-center">All Users</h1>
+            <div class="card py-2 px-2">
+                <table class="table table-striped table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                    {% for i in users %}
+                    <tr>
+                        <td> {{ forloop.counter }}</td>
+                        <td> {{ i.username }}</td>
+                        <td> {{ i.email }}</td>
+
+                        <td><a href="/admin-dashboard/update-user-to-admin/{{i.id}}"
+                               class="btn btn-warning btn-sm" onclick="return confirm('Are you sure want to update this user?')">
+                            Update to Admin</a>
+
+                    </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

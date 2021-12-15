@@ -1,0 +1,71 @@
+{% extends 'layout-admin.html' %}
+{% load static %}
+{% load bootstrap %}
+{% block title %}
+<title>Show Tour</title>
+{% endblock%}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 offset">
+            <h1 class="text-center"> Tours </h1>
+            <div class="card py-2 px-2 table-responsive">
+                <a class="btn btn-success btn-bg ml-auto mb-2" style="width: 100%"
+                   href="{% url 'postTour' %}">Add New Tour</a>
+
+                <table class="table table-responsive table-dark" >
+                    <tr class="bg">
+                        <th>#</th>
+                        <th>Tour Name</th>
+                        <th>Price</th>
+                        <th>Location</th>
+                        <th>Main Info</th>
+                        <th>Itinerary</th>
+                        <th>Country_Name</th>
+                        <th>Description</th>
+                        <th>Reviews</th>
+                        <th>Destination</th>
+                        <th>Picture</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for tour in tours %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ tour.name }}</td>
+                        <td>{{ tour.price }}</td>
+                        <td>{{ tour.location }}</td>
+                        <td>{{ tour.main_Info }}</td>
+                        <td>{% for itinerary in tour.itinerary.all %}
+                            {{ itinerary.name }}
+                            {% endfor %}
+                            </td>
+                        <td>{{ tour.country_Name }}</td>
+                        <td>{{ tour.description }}</td>
+                        <td>{% for reviews in tour.reviews.all %}
+                            {{ reviews.user }}
+                            {% endfor %}
+                            </td>
+                        <td>{% for destination in tour.destination.all %}
+                            {{ destination.name }}
+                            {% endfor %}
+                            </td>
+                        <td>{{ tour.picture }}</td>
+
+
+                        <td> <img src="{{tour.picture.url}}" alt="file_image" width="100"></td>
+                        <td><a href="/admin-dashboard/updateTour/{{ tour.id }}"
+                               class="btn btn-primary btn-sm">Edit</a>
+                            <br>
+                            <a href="/admin-dashboard/deleteTour/{{ tour.id }}"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('Are you sure want to delete this file?')">
+                                Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content%}
